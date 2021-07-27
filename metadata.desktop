@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=Kwin Snap Zones
+Comment=KWin script aiming at creating custom zones and allow snapping windows to them.
+Icon=preferences-system-windows
+
+X-KDE-PluginInfo-Author=Louis Ali Ben Abdallah
+X-KDE-PluginInfo-Email=louis.alibenabdallah@gmail.com
+X-KDE-PluginInfo-Name=kwin-snap-zones
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-License=GPL
+
+Type=Service
+X-KDE-ServiceTypes=KWin/Script
+X-Plasma-API=javascript
+X-Plasma-MainScript=code/main.js
