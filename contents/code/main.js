@@ -1,20 +1,53 @@
-// TODO: have a dynamic configuration
-var configs = [
-  { x: 0, y: 0, height: 697, width: 1080 },
-  { x: 0, y: 697, height: 678, width: 1080 },
-  { x: 0, y: 1375, height: 501, width: 1080 }
-];
+(function() {
+  "use strict";
 
-// resizes and moves the given client according to the given configuration
-function move(client, conf) {
-  if(!client.moveable) {
-      print(client.caption + " not moveable");
-      return;
+  var zones = [];
+
+  function loadZone(confNumber) {
+    var prefix = "z"+confNumber+"_";
+    return {
+      x: readConfig(prefix+"x"),
+      y: readConfig(prefix+"y"),
+      width: readConfig(prefix+"w"),
+      height: readConfig(prefix+"h")
+    };
   }
-  client.geometry = conf;
-  print("moved " + client.caption + " to " + JSON.stringify(conf));
-}
 
+  function loadZones() {
+    zones.push(loadZone(0));
+    zones.push(loadZone(1));
+    zones.push(loadZone(2));
+  }
+
+  function getZoneTheClientIsIn(client) {
+    var clientCenter = {
+      x: (client.geometry.width / 2) + client.geometry.x,
+      y: (client.geometry.height / 2) + client.geometry.y,
+    }
+
+    for (zone in zones) {
+      if (clientCenter.x > zone.x && clientCenter.x < (zone.x + zone.width)
+        && clientCenter.y > zone.y && clientCenter.y < (zone.y + zone.height))
+        return zone;
+    }
+    return false;
+  }
+
+  function clientFinishUserMovedResized(client) {
+    if(zones.length == 0 || !client.moveable) {
+      return;
+    }
+    var zone = getZoneTheClientIsIn(client);
+    if (zone) {
+      client.geometry = zone;
+    }
+  }
+
+  loadZones();
+  options.configChanged.connect(loadZones);
+})
+
+/*
 // find a client by its partial name
 // TODO: remove, should only be used during first steps of dev
 function findClient(clients, partialName) {
@@ -40,3 +73,5 @@ print("let's goooo");
 move(top, configs[0]);
 move(mid, configs[1]);
 move(bot, configs[2]);
+
+*/

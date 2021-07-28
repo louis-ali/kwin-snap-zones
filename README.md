@@ -8,5 +8,5 @@ KWin script aiming at creating custom zones and allow snapping windows to them
 3 - snap with drag'n'drop
 4 - show registered snap zones on screen while in the config UI (possible ?)
 bonuses - snap/nosnap switch
+  key pressed based (snap next moved window)
   delay based
-  key pressed based

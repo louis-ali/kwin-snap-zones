@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name=""/>
+  <group name="">
+    <!-- <entry name="enabledUsually" type="bool">
+      <default>true</default>
+    </entry> -->
+    <entry name="z0_x" type="string"><default>0</default></entry>
+    <entry name="z0_y" type="string"><default>0</default></entry>
+    <entry name="z0_w" type="string"><default>0</default></entry>
+    <entry name="z0_h" type="string"><default>0</default></entry>
+    
+    <entry name="z1_x" type="string"><default>0</default></entry>
+    <entry name="z1_y" type="string"><default>0</default></entry>
+    <entry name="z1_w" type="string"><default>0</default></entry>
+    <entry name="z1_h" type="string"><default>0</default></entry>
+    
+    <entry name="z2_x" type="string"><default>0</default></entry>
+    <entry name="z2_y" type="string"><default>0</default></entry>
+    <entry name="z2_w" type="string"><default>0</default></entry>
+    <entry name="z2_h" type="string"><default>0</default></entry>
+
+  </group>
+</kcfg>

@@ -1,0 +1,33 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+  <widget class="QWidget" name="KWin::SnapZonesConfigForm">
+    <property name="windowTitle"><string>Snap Zones</string></property>
+    <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0"><widget class="QLabel" name="label_z"><property name="text"><string>Zone</string></property></widget></item>
+      <item row="0" column="1"><widget class="QLabel" name="label_z_x"><property name="text"><string>x</string></property></widget></item>
+      <item row="0" column="2"><widget class="QLabel" name="label_z_y"><property name="text"><string>y</string></property></widget></item>
+      <item row="0" column="3"><widget class="QLabel" name="label_z_w"><property name="text"><string>width</string></property></widget></item>
+      <item row="0" column="4"><widget class="QLabel" name="label_z_h"><property name="text"><string>height</string></property></widget></item>
+      
+      <item row="1" column="0"><widget class="QLabel" name="label_z0"><property name="text"><string>0</string></property></widget></item>
+      <item row="1" column="1"><widget class="QSpinBox" name="xkcfg_z0_x"><property name="value"><string>0</string></property></widget></item>
+      <item row="1" column="2"><widget class="QSpinBox" name="xkcfg_z0_y"><property name="value"><string>0</string></property></widget></item>
+      <item row="1" column="3"><widget class="QSpinBox" name="xkcfg_z0_w"><property name="value"><string>0</string></property></widget></item>
+      <item row="1" column="4"><widget class="QSpinBox" name="xkcfg_z0_h"><property name="value"><string>0</string></property></widget></item>
+      
+      <item row="2" column="0"><widget class="QLabel" name="label_z1"><property name="text"><string>0</string></property></widget></item>
+      <item row="2" column="1"><widget class="QSpinBox" name="xkcfg_z1_x"><property name="value"><string>0</string></property></widget></item>
+      <item row="2" column="2"><widget class="QSpinBox" name="xkcfg_z1_y"><property name="value"><string>0</string></property></widget></item>
+      <item row="2" column="3"><widget class="QSpinBox" name="xkcfg_z1_w"><property name="value"><string>0</string></property></widget></item>
+      <item row="2" column="4"><widget class="QSpinBox" name="xkcfg_z1_h"><property name="value"><string>0</string></property></widget></item>
+      
+      <item row="3" column="0"><widget class="QLabel" name="label_z2"><property name="text"><string>0</string></property></widget></item>
+      <item row="3" column="1"><widget class="QSpinBox" name="xkcfg_z2_x"><property name="value"><string>0</string></property></widget></item>
+      <item row="3" column="2"><widget class="QSpinBox" name="xkcfg_z2_y"><property name="value"><string>0</string></property></widget></item>
+      <item row="3" column="3"><widget class="QSpinBox" name="xkcfg_z2_w"><property name="value"><string>0</string></property></widget></item>
+      <item row="3" column="4"><widget class="QSpinBox" name="xkcfg_z2_h"><property name="value"><string>0</string></property></widget></item>
+    </layout>
+  </widget>
+  <resources/>
+</ui>
