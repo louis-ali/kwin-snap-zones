@@ -25,16 +25,16 @@
       y: (client.geometry.height / 2) + client.geometry.y,
     }
 
-    for (zone in zones) {
-      if (clientCenter.x > zone.x && clientCenter.x < (zone.x + zone.width)
-        && clientCenter.y > zone.y && clientCenter.y < (zone.y + zone.height))
-        return zone;
+    for (var i = 0; i < zones.length; i++) {
+      if (clientCenter.x > zones[i].x && clientCenter.x < (zones[i].x + zones[i].width)
+        && clientCenter.y > zones[i].y && clientCenter.y < (zones[i].y + zones[i].height))
+        return zones[i];
     }
     return false;
   }
 
-  function clientFinishUserMovedResized(client) {
-    if(zones.length == 0 || !client.moveable) {
+  function onClientFinishedMoveResize(client) {
+    if(zones.length == 0) {
       return;
     }
     var zone = getZoneTheClientIsIn(client);
@@ -43,8 +43,19 @@
     }
   }
 
+  function connectClient(client) {
+    if(!client.moveable) return;
+    client.clientFinishUserMovedResized.connect(onClientFinishedMoveResize);
+  }
+
   loadZones();
   options.configChanged.connect(loadZones);
+
+  var clients = workspace.clientList();
+	for (var i = 0; i < clients.length; i++) {
+		connectClient(clients[i]);
+	}
+	workspace.clientAdded.connect(connectClient);
 })
 
 /*
