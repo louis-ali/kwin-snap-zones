@@ -1,88 +1,73 @@
-(function() {
-  "use strict";
+"use strict";
 
-  var zones = [];
+var zones = [];
 
-  function loadZone(confNumber) {
-    var prefix = "z"+confNumber+"_";
-    return {
-      x: readConfig(prefix+"x"),
-      y: readConfig(prefix+"y"),
-      width: readConfig(prefix+"w"),
-      height: readConfig(prefix+"h")
-    };
-  }
-
-  function loadZones() {
-    zones.push(loadZone(0));
-    zones.push(loadZone(1));
-    zones.push(loadZone(2));
-  }
-
-  function getZoneTheClientIsIn(client) {
-    var clientCenter = {
-      x: (client.geometry.width / 2) + client.geometry.x,
-      y: (client.geometry.height / 2) + client.geometry.y,
-    }
-
-    for (var i = 0; i < zones.length; i++) {
-      if (clientCenter.x > zones[i].x && clientCenter.x < (zones[i].x + zones[i].width)
-        && clientCenter.y > zones[i].y && clientCenter.y < (zones[i].y + zones[i].height))
-        return zones[i];
-    }
-    return false;
-  }
-
-  function onClientFinishedMoveResize(client) {
-    if(zones.length == 0) {
-      return;
-    }
-    var zone = getZoneTheClientIsIn(client);
-    if (zone) {
-      client.geometry = zone;
-    }
-  }
-
-  function connectClient(client) {
-    if(!client.moveable) return;
-    client.clientFinishUserMovedResized.connect(onClientFinishedMoveResize);
-  }
-
-  loadZones();
-  options.configChanged.connect(loadZones);
-
-  var clients = workspace.clientList();
-	for (var i = 0; i < clients.length; i++) {
-		connectClient(clients[i]);
-	}
-	workspace.clientAdded.connect(connectClient);
-})
-
-/*
-// find a client by its partial name
-// TODO: remove, should only be used during first steps of dev
-function findClient(clients, partialName) {
-  var i = 0;
-  while(clients[i] != undefined) {
-      if(clients[i].caption.indexOf(partialName) > -1) {
-          print(clients[i].caption + " matched " + partialName);
-          return clients[i];
-      }
-      i+=1;
-  }
-  return undefined;
+function loadZone(confNumber) {
+  var prefix = "z"+confNumber+"_";
+  var zone = {
+    x: readConfig(prefix+"x"),
+    y: readConfig(prefix+"y"),
+    width: readConfig(prefix+"w"),
+    height: readConfig(prefix+"h")
+  };
+  print("loaded zone " + JSON.stringify(zone));
+  return zone;
 }
 
-var clients = workspace.clientList();
-print("found " + clients.length + " clients");
+function loadZones() {
+  print("loading zones");
+  zones.push(loadZone(0));
+  zones.push(loadZone(1));
+  zones.push(loadZone(2));
+  print("zones loaded");
+}
 
-var bot = findClient(clients, "Telegram");
-var mid = findClient(clients, "Konsole");
-var top = findClient(clients, "Twitch");
+function getZoneTheClientIsIn(client) {
+  var clientCenter = {
+    x: (client.geometry.width / 2) + client.geometry.x,
+    y: (client.geometry.height / 2) + client.geometry.y,
+  }
 
-print("let's goooo");
-move(top, configs[0]);
-move(mid, configs[1]);
-move(bot, configs[2]);
+  for (var i = 0; i < zones.length; i++) {
+    if (clientCenter.x > zones[i].x && clientCenter.x < (zones[i].x + zones[i].width)
+      && clientCenter.y > zones[i].y && clientCenter.y < (zones[i].y + zones[i].height))
+      return zones[i];
+  }
+  return false;
+}
 
-*/
+function onClientFinishedMoveResize(client) {
+  print("client " + client.caption + " called onClientFinishedMoveResize");
+  if(zones.length == 0) {
+    return;
+  }
+  var zone = getZoneTheClientIsIn(client);
+  if (zone) {
+    print("client in zone " + JSON.stringify(zone));
+    client.geometry = zone;
+  } else {
+    print("client not in a zone");
+  }
+}
+
+function connectClient(client) {
+  if(!client.moveable) return;
+  print("connect client " + client.caption);
+  client.clientFinishUserMovedResized.connect(onClientFinishedMoveResize);
+}
+
+
+function init() {
+  print("init");
+  var clients = workspace.clientList();
+  for (var i = 0; i < clients.length; i++) {
+    connectClient(clients[i]);
+  }
+  loadZones();
+  options.configChanged.connect(loadZones);
+  workspace.clientAdded.connect(connectClient);
+  print("init done");
+}
+
+// init();
+print(readConfig("z0_x", "default"));
