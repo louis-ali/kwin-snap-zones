@@ -1,26 +1,30 @@
 "use strict";
 
-var zones = [];
+var zones = [
+  {x: 0, y: 0, width: 1080, height: 609},
+  {x: 0, y: 609, width: 1080, height: 767},
+  {x: 0, y: 1375, width: 1080, height: 501},
+];
 
-function loadZone(confNumber) {
-  var prefix = "z"+confNumber+"_";
-  var zone = {
-    x: readConfig(prefix+"x"),
-    y: readConfig(prefix+"y"),
-    width: readConfig(prefix+"w"),
-    height: readConfig(prefix+"h")
-  };
-  print("loaded zone " + JSON.stringify(zone));
-  return zone;
-}
+// function loadZone(confNumber) {
+//   var prefix = "z"+confNumber+"_";
+//   var zone = {
+//     x: readConfig(prefix+"x"),
+//     y: readConfig(prefix+"y"),
+//     width: readConfig(prefix+"w"),
+//     height: readConfig(prefix+"h")
+//   };
+//   print("loaded zone " + JSON.stringify(zone));
+//   return zone;
+// }
 
-function loadZones() {
-  print("loading zones");
-  zones.push(loadZone(0));
-  zones.push(loadZone(1));
-  zones.push(loadZone(2));
-  print("zones loaded");
-}
+// function loadZones() {
+//   print("loading zones");
+//   zones.push(loadZone(0));
+//   zones.push(loadZone(1));
+//   zones.push(loadZone(2));
+//   print("zones loaded");
+// }
 
 function getZoneTheClientIsIn(client) {
   var clientCenter = {
@@ -63,11 +67,10 @@ function init() {
   for (var i = 0; i < clients.length; i++) {
     connectClient(clients[i]);
   }
-  loadZones();
-  options.configChanged.connect(loadZones);
+  // loadZones();
+  // options.configChanged.connect(loadZones);
   workspace.clientAdded.connect(connectClient);
   print("init done");
 }
 
-// init();
-print(readConfig("z0_x", "default"));
+init();

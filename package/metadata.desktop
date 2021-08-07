@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Snap Zones
 Comment=Script aiming at creating custom zones and allow snapping windows to them.
-Icon=preferences-system-windows
+Icon=preferences-system-windows-script-test
 
 X-Plasma-API=javascript
 X-Plasma-MainScript=code/main.js
